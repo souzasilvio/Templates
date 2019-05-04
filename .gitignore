@@ -1,0 +1,5 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CRM 365/Modelo Arquitetura/CRM.Actions/bin/Debug
