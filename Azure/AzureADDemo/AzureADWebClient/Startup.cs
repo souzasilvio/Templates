@@ -97,8 +97,8 @@ namespace AzureADWebClient
 
         protected async Task OnAuthenticationFailed(AuthenticationFailedContext context)
         {
-            //context.HandleResponse();
-            //context.Response.Redirect("/Home/Error?message=" + context.Exception.Message);
+            context.HandleResponse();
+            context.Response.Redirect("/Home/Error?message=" + context.Exception.Message);
             //return Task.FromResult(0);
         }
 

@@ -56,6 +56,7 @@ namespace AzureADWebClient.Controllers
             return await Client.SendAsync(req);
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

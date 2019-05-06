@@ -23,24 +23,25 @@ namespace AzureADWebClient.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SignOut()
+        public async Task Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            if (User.Identity.IsAuthenticated)
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+            }
+        }
+        public IActionResult Cancel() => RedirectToAction("Index", "Home");
 
-            return SignOut(
-                new AuthenticationProperties
-                {
-                    RedirectUri = "/Account/SignedOut"
-                },
 
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                OpenIdConnectDefaults.AuthenticationScheme
-
-                );
+        [Route("logout")]
+        public IActionResult Logout(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
-        public IActionResult SignedOut() => View();
+
 
     }
 }
