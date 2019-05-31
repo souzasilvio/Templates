@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+ 
+  webapi1:
+    image: sad/webapi1
+    build:
+      context: .
+      dockerfile: WebApi1/Dockerfile   
+    ports:
+      - "58831:5000"
+    networks:
+      - sad-network
+  webapi2:
+    image: sad/webapi2
+    build:
+      context: .
+      dockerfile: WebApi2/Dockerfile  
+    ports:
+      - "58832:5000"
+    networks:
+      - sad-network 
+  webapp1:
+    image: sad/webapp1
+    build:
+      context: .
+      dockerfile: WebApp1/Dockerfile
+    ports:
+      - "44392:443"
+    networks:
+      - sad-network
+    depends_on:
+     - "webapi1"
+     - "webapi2"
+networks: 
+  sad-network:
+    driver: bridge

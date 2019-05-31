@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  webapp1:
+    image: ${DOCKER_REGISTRY-}webapp1    
+    build:
+      context: .
+      dockerfile: WebApp1\Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://localhost;http://localhost
+      - ASPNETCORE_HTTPS_PORT=44391
+      - ASPNETCORE_Kestrel__Certificates__Default__Password="Davisamuel@123"
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=\https\myCertificate.pfx
+      
+    ports:
+      - "44391:443"   
+      - "5000:80"    
+  
+    depends_on:
+     - "webapi1"
+     - "webapi2"
+
+  webapi2:
+    image: ${DOCKER_REGISTRY-}webapi2
+    build:
+      context: .
+      dockerfile: WebApi2\Dockerfile
+    ports:
+      - "44320:443"   
+      - "58839:80"
+  webapi1:
+    image: ${DOCKER_REGISTRY-}webapi1
+    build:
+      context: .
+      dockerfile: WebApi1\Dockerfile
+    ports:
+      - "44325:443"
+      - "58834:80"

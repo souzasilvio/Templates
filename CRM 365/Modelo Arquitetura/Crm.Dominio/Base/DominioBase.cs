@@ -83,6 +83,12 @@ namespace Crm.Dominio.Base
            return Repositorio.RepositorioEntity.Instancia.Create(registro, userId);
         }
 
+        public OrganizationResponse Execute(OrganizationRequest request)
+        {
+            return Repositorio.RepositorioEntity.Instancia.Execute(request);
+        }
+
+
         /// <summary>
         /// Atualiza um registro
         /// </summary>

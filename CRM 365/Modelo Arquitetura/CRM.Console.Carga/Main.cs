@@ -1,4 +1,5 @@
 ﻿using Crm.Dominio;
+using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using System;
 
@@ -17,8 +18,21 @@ namespace CRM.Console.Carga
             {
 
 
-                var user = new Entity("systemuser", new Guid("F8D8F6D7-0785-E811-A962-000D3AC09E71"));
-                SalesDomain.Instancia.Atualizar(user);
+                var user = new Entity("systemuser", new Guid("10E40917-B044-E911-A953-000D3AC01FBD"));
+                //user["state"] = new OptionSetValue(0);
+                //user["statuscode"] = new OptionSetValue(1);
+                //SalesDomain.Instancia.Atualizar(user);
+
+                SetStateRequest request = new SetStateRequest()
+                {
+                    EntityMoniker = user.ToEntityReference(),
+                    State = new OptionSetValue(0),
+
+                    Status = new OptionSetValue(-1)
+                };
+
+                SalesDomain.Instancia.Execute(request);
+
                 //CreateTems();
                 //CreateContacts();
                 //UpdateContacts();

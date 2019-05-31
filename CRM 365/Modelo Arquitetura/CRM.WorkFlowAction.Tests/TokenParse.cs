@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRM.Actions
+namespace CRM.WorkFlowAction.Tests
 {
     class TokenParse
     {
@@ -14,19 +14,19 @@ namespace CRM.Actions
             valoresToken = valor.Replace("{", "").Replace("}", "").Replace("\"", "").Split(',').ToList();
         }
 
-        public string error
-        {
+       
+    public string error
+    {
 
-            get
-            {
-                string[] result = valoresToken.Single(s => s.StartsWith("error")).Split(':');
-                return result[1];
-            }
+        get
+        {
+            string[] result = valoresToken.Single(s => s.StartsWith("error")).Split(':');
+            return result[1];
         }
+    }
 
-        public string error_description
-        {
-
+    public string error_description
+    {
             get
             {
                 string[] result = valoresToken.Single(s => s.StartsWith("error_description")).Split(':');
@@ -38,7 +38,8 @@ namespace CRM.Actions
                 }
             }
         }
-        public string access_token
+
+    public string access_token
         {
 
             get
