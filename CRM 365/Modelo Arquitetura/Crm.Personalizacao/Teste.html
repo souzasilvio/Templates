@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+
+        function ObterToken() {
+            var req = new XMLHttpRequest();
+            req.open("POST", "http://localhost:44373/api/endereco", true);
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    req.onreadystatechange = null;
+                    if (this.status === 200) {
+                        var results = JSON.parse(this.response);
+                        alert(results.Logradouro);
+                        return results;
+                    } else {
+                        alert(this.statusText);
+                    }
+                }
+            };
+            req.send();
+            //return req.responseText; 
+            //JSON.parse(this.response);
+        }
+
+        var sad_GeraTokenGlobalRequest = {
+            getMetadata: function () {
+                return {
+                    boundParameter: null,
+                    parameterTypes: {},
+                    operationType: 0,
+                    operationName: "sad_GeraTokenGlobal"
+                };
+            }
+        };
+
+        Xrm.WebApi.online.execute(sad_GeraTokenGlobalRequest).then(
+            function success(result) {
+                if (result.ok) {
+                    var results = JSON.parse(result.responseText);
+                    resolve(results);
+                }
+            },
+            function(error) {
+                Xrm.Utility.alertDialog(error.message);
+            }
+        );
+
+        function resolveAfter2Seconds(x)
+        {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve(x);
+            }, 2000);
+          });
+        }
+
+        async function f1() {
+            var x = await resolveAfter2Seconds(10);
+            alert(x);
+        }
+
+        
+
+
+        function Teste() {
+            f1();
+        }
+    </script>
+</head>
+<body>
+    <button type="button" onclick="Teste();">Teste</button>
+</body>
+</html>

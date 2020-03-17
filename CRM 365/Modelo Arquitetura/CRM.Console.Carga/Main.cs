@@ -23,18 +23,18 @@ namespace CRM.Console.Carga
                 //user["statuscode"] = new OptionSetValue(1);
                 //SalesDomain.Instancia.Atualizar(user);
 
-                SetStateRequest request = new SetStateRequest()
-                {
-                    EntityMoniker = user.ToEntityReference(),
-                    State = new OptionSetValue(0),
+                //SetStateRequest request = new SetStateRequest()
+                //{
+                //    EntityMoniker = user.ToEntityReference(),
+                //    State = new OptionSetValue(0),
 
-                    Status = new OptionSetValue(-1)
-                };
+                //    Status = new OptionSetValue(-1)
+                //};
 
-                SalesDomain.Instancia.Execute(request);
+                //SalesDomain.Instancia.Execute(request);
 
                 //CreateTems();
-                //CreateContacts();
+                CreateContacts();
                 //UpdateContacts();
                 //DeleteContacts();
             }
@@ -78,7 +78,7 @@ namespace CRM.Console.Carga
         private static void CreateContacts()
         {
 
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 2; i++)
             {
                 var contact = new Crm.Model.Contact();
                 contact.FirstName = "Sample";

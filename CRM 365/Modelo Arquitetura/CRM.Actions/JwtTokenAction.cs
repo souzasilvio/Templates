@@ -113,7 +113,7 @@ namespace CRM.Actions
                 }
                 else
                 {
-                    Token.Set(ExecutionContext, tokenConfigRecord.GetAttributeValue<DateTime>(valor_token));
+                    Token.Set(ExecutionContext, tokenConfigRecord.GetAttributeValue<string>(valor_token));
                     ExpiresIn.Set(ExecutionContext, tokenConfigRecord.GetAttributeValue<DateTime>(data_expiracao));
                     Sucess.Set(ExecutionContext, true);
                     Message.Set(ExecutionContext, "Sucess");

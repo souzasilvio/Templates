@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Demo - Aplicativos Web</h1>
+        <p>
+            Para os aplicativos Web (.NET, PHP, Java, Ruby, Python, Node) que o usuário acessa por meio de um navegador, você pode usar o OpenID Connect para entrada do usuário. No OpenID Connect, o aplicativo Web recebe um token de ID. Um token de ID é um token de segurança que verifica a identidade do usuário e fornece informações sobre o usuário na forma de declarações:
+        </p>
+        <p>Ref:<a href="https://docs.microsoft.com/pt-br/azure/active-directory/develop/v2-app-types">Aplicativos Web</a>.</p>
+
+        <br />
+        <table class="table">
+            @foreach (var claim in User.Claims)
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </table>
+
+      
+
+    </div>

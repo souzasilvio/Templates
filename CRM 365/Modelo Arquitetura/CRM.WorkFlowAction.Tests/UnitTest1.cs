@@ -40,29 +40,47 @@ namespace CRM.WorkFlowAction.Tests
             }
         }
 
-        [TestMethod]
-        public void ActionGetToken()
+        private Entity GetRegistroToken()
         {
             var endPoint = "https://login.microsoftonline.com/94b1e746-0c85-4ddd-99b7-1e6ac22c732b/oauth2/token";
             var clientId = "5bad115b-8a84-47dc-bae0-831b2b5c90e6";
             var clientSecret = "kzzqngba7/*r*D3zlqZwLNnwyH_3nL7*";
             var resource = "ef66c957-24fc-4a62-9f19-864b23e502de";
-            
+
             Guid id = new Guid("5bad115b-8a84-47dc-bae0-831b2b5c9999");
-            var registro = new Entity("sad_token") { Id = id};
+            var registro = new Entity("sad_token") { Id = id };
             registro["sad_token_endpoint"] = endPoint;
             registro["sad_clientid"] = clientId;
             registro["sad_client_secret"] = clientSecret;
             registro["sad_resource"] = resource;
-            
+            return registro;
+        }
+
+        [TestMethod]
+        public void ActionGetToken()
+        {
+            var registro = GetRegistroToken();            
             fakedContext.Initialize(new List<Entity>() { registro });                   
-            var inputs = new Dictionary<string, Object> { {"TokenConfig", registro.ToEntityReference() } };          
-           
+            var inputs = new Dictionary<string, Object> { {"TokenConfig", registro.ToEntityReference() } };                     
             var codeActivity = new JwtTokenAction();
             var result1 = fakedContext.ExecuteCodeActivity<JwtTokenAction>(wfContext, inputs, codeActivity);
             Assert.IsTrue((bool)result1["Sucess"], (string)result1["Message"]);
         }
 
-        
+        [TestMethod]
+        public void ActionGetTokenDoCache()
+        {
+            var registro = GetRegistroToken();
+            registro["sad_data_expiracao"] = DateTime.Now;
+            registro["sad_valor_token"] = "xxxxxxxxxxxxx";
+
+            fakedContext.Initialize(new List<Entity>() { registro });
+            var inputs = new Dictionary<string, Object> { { "TokenConfig", registro.ToEntityReference() } };
+            var codeActivity = new JwtTokenAction();
+            var result1 = fakedContext.ExecuteCodeActivity<JwtTokenAction>(wfContext, inputs, codeActivity);
+            Assert.IsTrue((bool)result1["Sucess"], (string)result1["Message"]);
+        }
+
+
     }
 }

@@ -25,7 +25,8 @@ namespace Crm.Repositorio
                 {
                     lock (syncRoot)
                     {
-                        var conn = new CrmServiceClient(ConfigurationManager.ConnectionStrings["Crm365"].ConnectionString);
+                        var ct = ConfigurationManager.ConnectionStrings["Crm365"].ConnectionString;
+                        var conn = new CrmServiceClient(ct);
                         if (!conn.IsReady)
                         {
                             throw new ApplicationException(conn.LastCrmError);

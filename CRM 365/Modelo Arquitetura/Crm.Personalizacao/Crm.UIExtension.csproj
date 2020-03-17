@@ -70,11 +70,13 @@
     <Content Include="Scripts\Entities\Account.js" />
     <Content Include="Scripts\Entities\FormTest.js" />
     <Content Include="Scripts\Entities\Tempalate.js" />
+    <Content Include="Scripts\Entities\Token.js" />
     <Content Include="Scripts\WebResource\angular.min.js" />
     <Content Include="Scripts\WebResource\attributes.html" />
     <Content Include="Scripts\WebResource\packt.app.js" />
     <Content Include="Scripts\WebResource\packt.controller.js" />
     <Content Include="Scripts\WebResource\packt.services.js" />
+    <Content Include="Teste.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
